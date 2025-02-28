@@ -1,0 +1,35 @@
+{
+  "name": "tradepumpfun",
+  "version": "0.0.6",
+  "license": "MIT",
+  "author": "Trade Pump Fun",
+  "homepage": "https://tradepump.fun",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "src": "src"
+  },
+  "files": [
+    "lib",
+    "lib/esm/index.d.ts"
+  ],
+  "scripts": {
+    "build:lib": "tsc --outDir ./lib/cjs --module CommonJS && tsc --outDir ./lib/esm",
+    "build": "yarn run build:lib",
+    "test": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": "1.X"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}
