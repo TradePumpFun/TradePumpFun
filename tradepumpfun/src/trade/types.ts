@@ -51,28 +51,7 @@ export type TokenSellResponse = {
   };
 };
 
-export type TokenTransferResponse = {
-  result: {
-    mint: string;
-    fromWallet: string;
-    recipientWallet: string;
-    amountInToken: string;
-    signature: string;
-    fromTokenAccount: string;
-    recipientTokenAccount: string;
-  };
-  solscan: {
-    mint: string;
-    fromTokenAccount: string;
-    recipientTokenAccount: string;
-    fromWallet: string;
-    recipientWallet: string;
-    tx: string;
-  };
-  pumpfun: {
-    mint: string;
-  };
-};
+
 
 export type ISellTokenInput = {
   feePayer?: string | null;

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { apiHost, isFailedStatus } from "../utils";
 import {
+  CreateTokenResponse,
   ICloseTokenAccountInput,
+  ICreateTokenInput,
   IRetrieveTokenBalanceInput,
   IRetrieveTokenMarketCapInput,
   IRetrieveTokenMetadataInput,
@@ -205,6 +207,63 @@ export class PumpApiTokenClient {
       {
         method: "GET",
         headers: this.headers,
+      }
+    );
+
+    if (isFailedStatus(response.status)) {
+      throw new Error(response.statusText);
+    }
+
+    return response.data;
+  }
+
+
+  /**
+   * @name createToken
+   */
+  async createToken({
+    file,
+    name,
+    symbol,
+    description,
+    website,
+    twitter,
+    telegram,
+    fromWallet,
+    buyAmountInLamports,
+    feePayer,
+  }: ICreateTokenInput): Promise<CreateTokenResponse> {
+    const form = new FormData();
+    form.append("file", file);
+    form.append("fromWallet", fromWallet);
+    form.append("name", name);
+    form.append("symbol", symbol);
+    form.append("description", description);
+    if (website) {
+      form.append("website", website);
+    }
+    if (twitter) {
+      form.append("twitter", twitter);
+    }
+    if (telegram) {
+      form.append("telegram", telegram);
+    }
+
+    if (feePayer) {
+      form.append("feePayer", feePayer);
+    }
+    if (buyAmountInLamports) {
+      form.append("buyAmountInLamports", buyAmountInLamports.toString());
+    }
+
+    const response = await axios.post<CreateTokenResponse>(
+      `${this.baseUrl}/create`,
+      form,
+      {
+        headers: {
+          ...this.headers,
+          "Content-Type": `multipart/form-data;`,
+        },
       }
     );
 

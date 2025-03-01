@@ -148,3 +148,30 @@ export type TokenMarketCapResponse = {
     mint: string;
   };
 };
+
+export type ICreateTokenInput = {
+  file: Blob;
+  name: string;
+  symbol: string;
+  description: string;
+  website?: string | null;
+  twitter?: string | null;
+  telegram?: string | null;
+  fromWallet: string;
+  buyAmountInLamports?: number | null;
+  feePayer?: string | null;
+};
+
+export type CreateTokenResponse = {
+  result: {
+    mint: string;
+    tx: string;
+  };
+  solscan: {
+    mint: string;
+    tx: string;
+  };
+  pumpfun: {
+    mint: string;
+  };
+};

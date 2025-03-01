@@ -6,6 +6,7 @@ import { PumpApiSolanaClient } from "../solana";
 import { PumpApiTokenClient } from "../token";
 import { PumpApiTradeClient } from "../trade";
 import { PumpApiTransactionClient } from "../transaction";
+import { PumpApiBundleClient } from "../bundle";
 export class PumpApiClient {
   private readonly apiKey: string;
   private readonly baseUrl: string;
@@ -14,6 +15,7 @@ export class PumpApiClient {
   readonly token: PumpApiTokenClient;
   readonly trade: PumpApiTradeClient;
   readonly transaction: PumpApiTransactionClient;
+  readonly bundle: PumpApiBundleClient;
   readonly headers: {
     "x-api-key": string;
   };
@@ -29,6 +31,7 @@ export class PumpApiClient {
     this.token = new PumpApiTokenClient({ apiKey });
     this.trade = new PumpApiTradeClient({ apiKey });
     this.transaction = new PumpApiTransactionClient({ apiKey });
+    this.bundle = new PumpApiBundleClient({ apiKey });
   }
 
   async ping(): Promise<PingResponse> {
