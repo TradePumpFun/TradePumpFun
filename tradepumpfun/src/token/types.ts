@@ -150,7 +150,7 @@ export type TokenMarketCapResponse = {
 };
 
 export type ICreateTokenInput = {
-  file: Blob;
+  file: File;
   name: string;
   symbol: string;
   description: string;
