@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiHost, isFailedStatus } from "../utils";
+import { apiHost as defaultApiHost, isFailedStatus } from "../utils";
 import {
   IRetrieveOneTransactionInput,
   IRetrieveTransactionsInput,
@@ -16,7 +16,7 @@ export class PumpApiTransactionClient {
   readonly headers: {
     "x-api-key": string;
   };
-  constructor({ apiKey }: { apiKey: string }) {
+  constructor({ apiKey, apiHost = defaultApiHost }: { apiKey: string, apiHost?: string }) {
     this.apiKey = apiKey;
     this.baseUrl = `${apiHost}/transaction`;
     this.headers = {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { PingResponse } from "./types";
 import { PumpApiWalletClient } from "../wallets";
-import { apiHost, isFailedStatus } from "../utils";
+import { apiHost as defaultApiHost, isFailedStatus } from "../utils";
 import { PumpApiSolanaClient } from "../solana";
 import { PumpApiTokenClient } from "../token";
 import { PumpApiTradeClient } from "../trade";
@@ -19,19 +19,25 @@ export class PumpApiClient {
   readonly headers: {
     "x-api-key": string;
   };
-  constructor({ apiKey }: { apiKey: string }) {
+  constructor({
+    apiKey,
+    apiHost = defaultApiHost,
+  }: {
+    apiKey: string,
+    apiHost?: string
+  }) {
     this.apiKey = apiKey;
     this.baseUrl = apiHost;
     this.headers = {
       "x-api-key": this.apiKey,
     };
     // Clients
-    this.wallet = new PumpApiWalletClient({ apiKey });
-    this.solana = new PumpApiSolanaClient({ apiKey });
-    this.token = new PumpApiTokenClient({ apiKey });
-    this.trade = new PumpApiTradeClient({ apiKey });
-    this.transaction = new PumpApiTransactionClient({ apiKey });
-    this.bundle = new PumpApiBundleClient({ apiKey });
+    this.wallet = new PumpApiWalletClient({ apiKey, apiHost });
+    this.solana = new PumpApiSolanaClient({ apiKey, apiHost });
+    this.token = new PumpApiTokenClient({ apiKey, apiHost });
+    this.trade = new PumpApiTradeClient({ apiKey, apiHost });
+    this.transaction = new PumpApiTransactionClient({ apiKey, apiHost });
+    this.bundle = new PumpApiBundleClient({ apiKey, apiHost });
   }
 
   async ping(): Promise<PingResponse> {

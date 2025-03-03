@@ -6,7 +6,7 @@ import {
   WalletFindAllResponse,
   WalletFindOneResponse,
 } from "./types";
-import { apiHost, isFailedStatus } from "../utils";
+import { apiHost as defaultApiHost, isFailedStatus } from "../utils";
 
 export class PumpApiWalletClient {
   private readonly apiKey: string;
@@ -15,7 +15,7 @@ export class PumpApiWalletClient {
     "x-api-key": string;
   };
 
-  constructor({ apiKey }: { apiKey: string }) {
+  constructor({ apiKey, apiHost = defaultApiHost }: { apiKey: string, apiHost?: string }) {
     this.apiKey = apiKey;
     this.baseUrl = `${apiHost}/wallet`;
     this.headers = {
